@@ -550,10 +550,6 @@ void display_wifibars(int x, int y, int size_x, int size_y, int nbars, int nbars
     if (ibar <= nbars_filled) {
       display->fillRect(x + (ibar - 1)*size_x / nbars, y + (nbars - ibar)*size_y / nbars, (size_x / nbars) - 1, size_y * ibar / nbars);
     }
-    else
-    {
-      display->drawRect(x + (ibar - 1)*size_x / nbars, y + (nbars - ibar)*size_y / nbars, (size_x / nbars) - 1, size_y * ibar / nbars);
-    }
   }
 }
 
