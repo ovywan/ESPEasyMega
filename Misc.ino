@@ -1273,6 +1273,30 @@ String parseTemplate(String &tmpString, byte lineSize)
   // replace other system variables like %sysname%, %systime%, %ip%
   newString.replace(F("%sysname%"), Settings.Name);
 
+  String strDay = "";
+  if (day() < 10)
+    strDay += "0";
+  strDay += day();
+  newString.replace(F("%sysday%"), strDay);
+
+  String strMonth = "";
+  if (month() < 10)
+    strMonth += "0";
+  strMonth += month();
+  newString.replace(F("%sysmonth%"), strMonth);
+
+  String strYear = "";
+  strYear += year();
+  newString.replace(F("%sysyear%"), strYear);
+
+  String strDate = "";
+  strDate += strDay;
+  strDate += ".";
+  strDate += strMonth;
+  strDate += ".";
+  strDate += strYear;
+  newString.replace(F("%sysdate%"), strDate);
+
   String strTime = "";
   if (hour() < 10)
     strTime += " ";
@@ -1679,6 +1703,21 @@ unsigned long now() {
   return (unsigned long)sysTime;
 }
 
+int day()
+{
+  return tm.Day;
+}
+
+int month()
+{
+  return tm.Month;
+}
+
+int year()
+{
+  return tm.Year + 1970;
+}
+
 int hour()
 {
   return tm.Hour;
@@ -1988,7 +2027,7 @@ boolean ruleMatch(String& event, String& rule)
   {
     int pos = rule.indexOf('#');
     if (pos == -1) // no # sign in rule, use 'wildcard' match...
-      tmpEvent = event.substring(0,rule.length());
+      tmpEvent = event.substring(0, rule.length());
 
     if (tmpEvent.equalsIgnoreCase(rule))
       return true;
