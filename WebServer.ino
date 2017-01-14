@@ -173,6 +173,17 @@ void handle_root() {
       if (minute() < 10)
         reply += "0";
       reply += minute();
+
+      reply += F("<TR><TD>System Date:<TD>");
+      if (day() < 10)
+        reply += "0";
+      reply += day();
+      reply += "/";
+      if (month() < 10)
+        reply += "0";
+      reply += month();
+      reply += "/";
+      reply += year();
     }
     else
       reply += F("NTP disabled");
@@ -2928,17 +2939,17 @@ void handle_sysinfo() {
     reply += F(" dB");
     reply += F("<TR><TD>Wifi Type:<TD>");
     byte PHYmode = wifi_get_phy_mode();
-    switch(PHYmode)
+    switch (PHYmode)
     {
       case 1:
         reply += F("802.11B");
-        break;        
+        break;
       case 2:
         reply += F("802.11G");
-        break;        
+        break;
       case 3:
         reply += F("802.11N");
-        break;        
+        break;
     }
   }
 
