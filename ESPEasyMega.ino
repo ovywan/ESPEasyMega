@@ -107,7 +107,7 @@
 // Enable FEATURE_ADC_VCC to measure supply voltage using the analog pin
 // Please note that the TOUT pin has to be disconnected in this mode
 // Use the "System Info" device to read the VCC value
-#define FEATURE_ADC_VCC                  false
+#define FEATURE_ADC_VCC                  true
 
 // ********************************************************************************
 //   DO NOT CHANGE ANYTHING BELOW THIS LINE
@@ -369,6 +369,7 @@ struct SettingsStruct
   boolean       NotificationEnabled[NOTIFICATION_MAX];
   unsigned int  TaskDeviceID[CONTROLLER_MAX][TASKS_MAX];
   boolean       TaskDeviceSendData[CONTROLLER_MAX][TASKS_MAX];
+  boolean       AutoDST;
 } Settings;
 
 struct ControllerSettingsStruct

@@ -2143,6 +2143,7 @@ void handle_advanced() {
   String ntphost = WebServer.arg(F("ntphost"));
   String timezone = WebServer.arg(F("timezone"));
   String dst = WebServer.arg(F("dst"));
+  String dstauto = WebServer.arg(F("dstauto"));
   String sysloglevel = WebServer.arg(F("sysloglevel"));
   String udpport = WebServer.arg(F("udpport"));
   String useserial = WebServer.arg(F("useserial"));
@@ -2181,6 +2182,7 @@ void handle_advanced() {
     Settings.BaudRate = baudrate.toInt();
     Settings.UseNTP = (usentp == "on");
     Settings.DST = (dst == "on");
+    Settings.AutoDST = (dstauto == "on");
     Settings.WDI2CAddress = wdi2caddress.toInt();
     Settings.UseSSDP = (usessdp == "on");
     Settings.WireClockStretchLimit = wireclockstretchlimit.toInt();
@@ -2225,11 +2227,24 @@ void handle_advanced() {
   reply += Settings.TimeZone;
   reply += F("'>");
 
-  reply += F("<TR><TD>DST:<TD>");
-  if (Settings.DST)
-    reply += F("<input type=checkbox name='dst' checked>");
+  reply += F("<TR><TD>Automatic DST:<TD>");
+  if (Settings.AutoDST)
+  {
+    reply += F("<input type=checkbox name='dstauto' checked>");
+    if (Settings.DST)
+      reply += F("<TR><TD>DST:<TD>Active");
+    else
+      reply += F("<TR><TD>DST:<TD>Inactive");
+  }
   else
-    reply += F("<input type=checkbox name='dst'>");
+  {
+    reply += F("<input type=checkbox name='dstauto'>");
+    reply += F("<TR><TD>DST:<TD>");
+    if (Settings.DST)
+      reply += F("<input type=checkbox name='dst' checked>");
+    else
+      reply += F("<input type=checkbox name='dst'>");
+  }
 
   reply += F("<TR><TD>Syslog IP:<TD><input type='text' name='syslogip' value='");
   str[0] = 0;

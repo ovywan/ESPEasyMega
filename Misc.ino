@@ -1692,6 +1692,12 @@ unsigned long now() {
   if (nextSyncTime <= sysTime) {
     unsigned long  t = getNtpTime();
     if (t != 0) {
+      if (Settings.AutoDST) {
+        if ((month() > 3 && month() < 10) || (month() == 10 && day() < 25))
+          Settings.DST = 1;
+        else if (month() < 3 || month() > 10 || (month() == 3 && day() < 25) )
+          Settings.DST = 0;
+      }
       if (Settings.DST)
         t += SECS_PER_HOUR; // add one hour if DST active
       setTime(t);
