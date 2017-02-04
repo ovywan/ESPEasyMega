@@ -137,7 +137,9 @@ boolean CPlugin_001(byte function, struct EventStruct *event, String& string)
               }
               break;
           }
-
+          
+          url += "&rssi=";
+          url += signalLevel();
           url.toCharArray(log, 80);
           addLog(LOG_LEVEL_DEBUG_MORE, log);
 
@@ -198,6 +200,14 @@ int humStat(int hum) {
 
   }
   return lHumStat;
+}
+
+int signalLevel() {
+  int sigLevel;
+  sigLevel = (WiFi.RSSI() + 100) / 6;
+  if (sigLevel > 11) sigLevel = 11;
+  if (sigLevel < 0) sigLevel = 0;
+  return sigLevel;
 }
 /*
   boolean Domoticz_getData(int idx, float *data, byte index) // todo
