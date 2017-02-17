@@ -1734,6 +1734,11 @@ int minute()
   return tm.Minute;
 }
 
+int second()
+{
+  return tm.Second;
+}
+
 int weekday()
 {
   return tm.Wday;
