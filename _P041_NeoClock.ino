@@ -116,11 +116,11 @@ boolean Plugin_041(byte function, struct EventStruct *event, String& string)
       {
         String tmpString  = string;
 
-        if (tmpString.startsWith("Clock:")) {
-          int idx1 = tmpString.indexOf(':');
-          int idx2 = tmpString.indexOf(':', idx1 + 1);
-          int idx3 = tmpString.indexOf(':', idx2 + 1);
-          int idx4 = tmpString.indexOf(':', idx3 + 1);
+        if (tmpString.startsWith("Clock,")) {
+          int idx1 = tmpString.indexOf(',');
+          int idx2 = tmpString.indexOf(',', idx1 + 1);
+          int idx3 = tmpString.indexOf(',', idx2 + 1);
+          int idx4 = tmpString.indexOf(',', idx3 + 1);
           String val_Mode = tmpString.substring(idx1 + 1, idx2);
           String val_Bright = tmpString.substring(idx2 + 1, idx3);
           String val_Marks = tmpString.substring(idx3 + 1, idx4);
